@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <!-- Toolbar -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Resultado (Nome, IMC e Categoria) -->
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Botão: Calcular Gasto Calórico -->
+    <Button
+        android:id="@+id/btnCaloric"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Calcular Gasto Calórico"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/resultText"
+        app:layout_constraintStart_toStartOf="@id/resultText"
+        app:layout_constraintEnd_toEndOf="@id/resultText"/>
+
+    <!-- Botão: Voltar -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/btnCaloric"
+        app:layout_constraintStart_toStartOf="@id/btnCaloric"
+        app:layout_constraintEnd_toEndOf="@id/btnCaloric"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

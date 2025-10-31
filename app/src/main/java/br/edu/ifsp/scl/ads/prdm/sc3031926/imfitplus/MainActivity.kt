@@ -22,4 +22,5 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.title = "Seja bem vindo!"
     }
+
 }
