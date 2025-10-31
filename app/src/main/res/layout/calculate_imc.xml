@@ -4,11 +4,63 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewWelcome"
+        android:id="@+id/inputName"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:text="Txtesdma"/>
+        android:inputType="number"
+        android:textSize="18sp"
+        android:imeOptions="actionNext"
+        android:hint="Seu Nome"
+        android:gravity="center"
+        android:paddingBottom="32dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputWeight"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:imeOptions="actionNext"
+        android:hint="Peso(kg)"
+        android:gravity="center"
+        android:paddingBottom="32dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputHeight"
+        app:layout_constraintTop_toBottomOf="@id/inputWeight"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:imeOptions="actionNext"
+        android:hint="Idade"
+        android:gravity="center"
+        android:paddingBottom="32dp"/>
+    <Spinner
+        android:id="@+id/spinnerActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/inputHeight"
+        app:layout_constraintStart_toStartOf="@id/inputName"
+        app:layout_constraintEnd_toEndOf="@id/inputName"
+        android:layout_marginTop="12dp"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputSex"
+        app:layout_constraintTop_toBottomOf="@id/inputHeight">
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feminino"/>
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masculino"/>
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,13 @@ class CalculateImcActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = CalculateImcBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupToolbar(binding)
     }
+
+    private fun setupToolbar(binding: CalculateImcBinding) {
+        setSupportActionBar(binding.toolbar.toolbar)
+        supportActionBar?.title = "Calculadora de IMC"
+    }
+
 
 }
