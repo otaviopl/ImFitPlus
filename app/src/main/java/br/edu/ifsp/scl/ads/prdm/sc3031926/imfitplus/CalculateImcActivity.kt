@@ -2,6 +2,7 @@ package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateImcBinding
@@ -15,6 +16,13 @@ class CalculateImcActivity : AppCompatActivity() {
         binding = CalculateImcBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar(binding)
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.activity_levels,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerActivity.adapter = adapter
 
         binding.calcImcbtn.setOnClickListener { handleImcButtonClick() }
     }
@@ -49,10 +57,11 @@ class CalculateImcActivity : AppCompatActivity() {
             imc < 30 -> "Sobrepeso"
             else -> "Obesidade"
         }
+        val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
-        // Envia os dados para a ResultActivity
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra("name", name)
+            putExtra("activityLevel", activityLevel)
             putExtra("imc", String.format("%.2f", imc))
             putExtra("categoria", categoria)
         }

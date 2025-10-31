@@ -15,7 +15,9 @@ class ResultActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val imc = intent.getStringExtra("imc")
         val categoria = intent.getStringExtra("categoria")
-        binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria"
+        val activityLevel = intent.getStringExtra("activityLevel")
+        binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
+        binding.btnBack.setOnClickListener { finish() }
     }
 
     private fun setupToolbar() {
