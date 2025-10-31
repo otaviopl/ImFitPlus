@@ -52,7 +52,7 @@
         android:id="@+id/inputHeight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Altura (m) ex.: 175"
+        android:hint="Altura (cm) ex.: 175"
         android:inputType="numberDecimal"
         android:imeOptions="actionNext"
         android:textSize="18sp"
