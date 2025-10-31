@@ -36,6 +36,12 @@ class CalculateImcActivity : AppCompatActivity() {
         val name = binding.inputName.text.toString().trim()
         val weightStr = binding.inputWeight.text.toString().trim()
         val heightStr = binding.inputHeight.text.toString().trim()
+        val sexOption = binding.inputSex.checkedRadioButtonId
+
+        if (sexOption == -1) {
+            Toast.makeText(this, "Selecione o sexo!", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         if (name.isEmpty() || weightStr.isEmpty() || heightStr.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
@@ -73,6 +79,9 @@ class CalculateImcActivity : AppCompatActivity() {
             putExtra("activityLevel", activityLevel)
             putExtra("imc", String.format("%.2f", imc))
             putExtra("categoria", categoria)
+            putExtra("height", height)
+            putExtra("weight", weight)
+            putExtra("Sex", sexOption)
         }
         startActivity(intent)
     }

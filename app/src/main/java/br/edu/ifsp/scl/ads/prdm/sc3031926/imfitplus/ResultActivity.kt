@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.ResultActivityBinding
@@ -18,6 +19,7 @@ class ResultActivity : AppCompatActivity() {
         val activityLevel = intent.getStringExtra("activityLevel")
         binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
         binding.btnBack.setOnClickListener { finish() }
+        binding.btnCaloric.setOnClickListener { Intent("CALCULATE_CALORIC").let { startActivity(it) } }
     }
 
     private fun setupToolbar() {
