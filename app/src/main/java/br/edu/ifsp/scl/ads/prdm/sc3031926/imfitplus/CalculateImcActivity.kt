@@ -18,6 +18,8 @@ class CalculateImcActivity : AppCompatActivity() {
         setupToolbar(binding)
         setupSpinner()
         binding.calcImcbtn.setOnClickListener { handleImcButtonClick() }
+        binding.btnBack.setOnClickListener { finish() }
+
     }
 
     private fun setupToolbar(binding: CalculateImcBinding) {
