@@ -19,19 +19,16 @@ class CalculateCaloricActivity : AppCompatActivity() {
         val sex           = intent.getStringExtra("sex").orEmpty()
         val age           = intent.getIntExtra("age", 0)
         val weightKg      = intent.getDoubleExtra("weightKg", 0.0)              // <- chave correta
-        val heightM       = intent.getDoubleExtra("heightM", 0.0)               // <- vem em metros
-        val heightCm      = heightM * 100                                       // <- converte para cm
+        val heightM       = intent.getDoubleExtra("heightM", 0.0)               // <- vem em metros         // <- converte para cm
         val activityLevel = intent.getStringExtra("activityLevel").orEmpty()
 
-        android.util.Log.d("CAL", "name=$name sex=$sex age=$age weightKg=$weightKg heightCm=$heightCm level=$activityLevel")
-
-        if (name.isEmpty() || sex.isEmpty() || age <= 0 || weightKg <= 0.0 || heightCm <= 0.0) {
+        if (name.isEmpty() || sex.isEmpty() || age <= 0 || weightKg <= 0.0 || heightM <= 0.0) {
             Toast.makeText(this, "Dados insuficientes para calcular o gasto calórico.", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
-        val bmr = calculateBmrReference(sex, weightKg, heightCm, age)
+        val bmr = calculateBmrReference(sex, weightKg, heightM, age)
         val factor = activityFactor(activityLevel)
         val tdee  = bmr * factor
 
