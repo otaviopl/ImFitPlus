@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateImcBinding
-import kotlin.math.pow
 
 class CalculateImcActivity : AppCompatActivity() {
     private lateinit var binding: CalculateImcBinding
@@ -15,15 +14,9 @@ class CalculateImcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = CalculateImcBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupToolbar(binding)
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.activity_levels,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerActivity.adapter = adapter
 
+        setupToolbar(binding)
+        setupSpinner()
         binding.calcImcbtn.setOnClickListener { handleImcButtonClick() }
     }
 
@@ -32,14 +25,24 @@ class CalculateImcActivity : AppCompatActivity() {
         supportActionBar?.title = "Calculadora de IMC"
     }
 
+    private fun setupSpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.activity_levels,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerActivity.adapter = adapter
+    }
+
     private fun handleImcButtonClick() {
         val name = binding.inputName.text.toString().trim()
         val weightStr = binding.inputWeight.text.toString().trim()
         val heightStr = binding.inputHeight.text.toString().trim()
-        val sexOption = binding.inputSex.checkedRadioButtonId
+        val ageInt = binding.inputAge.text.toString().trim().toIntOrNull()
 
-        if (sexOption == -1) {
-            Toast.makeText(this, "Selecione o sexo!", Toast.LENGTH_SHORT).show()
+        if (ageInt == null) {
+            Toast.makeText(this, "Informe uma idade válida!", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -48,41 +51,43 @@ class CalculateImcActivity : AppCompatActivity() {
             return
         }
 
-        val weight = weightStr.replace(",", ".").toDoubleOrNull()
-        var height = heightStr.replace(",", ".").toDoubleOrNull()
+        val weightKg = weightStr.replace(",", ".").toDoubleOrNull()
+        var heightM = heightStr.replace(",", ".").toDoubleOrNull()
 
-        if (weight == null || height == null) {
+        if (weightKg == null || heightM == null) {
             Toast.makeText(this, "Valores inválidos!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (height > 3.0) height /= 100.0
-
-        if (height <= 0.0) {
+        // Se o usuário digitar altura em centímetros (ex: 180)
+        if (heightM > 3.0) heightM /= 100.0
+        if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val imc = weight / (height * height)
+        val sex = if (binding.radioMale.isChecked) "Masculino" else "Feminino"
+        val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
+        val imc = weightKg / (heightM * heightM)
         val categoria = when {
             imc < 18.5 -> "Abaixo do peso"
-            imc < 25 -> "Normal"
-            imc < 30 -> "Sobrepeso"
-            else -> "Obesidade"
+            imc < 25   -> "Normal"
+            imc < 30   -> "Sobrepeso"
+            else       -> "Obesidade"
         }
-
-        val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra("name", name)
             putExtra("activityLevel", activityLevel)
             putExtra("imc", String.format("%.2f", imc))
             putExtra("categoria", categoria)
-            putExtra("height", height)
-            putExtra("weight", weight)
-            putExtra("Sex", sexOption)
+            putExtra("age", ageInt)
+            putExtra("heightM", heightM)
+            putExtra("weightKg", weightKg)
+            putExtra("sex", sex)
         }
+
         startActivity(intent)
     }
 }

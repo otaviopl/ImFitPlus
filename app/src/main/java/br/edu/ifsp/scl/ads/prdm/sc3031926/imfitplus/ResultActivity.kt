@@ -19,11 +19,24 @@ class ResultActivity : AppCompatActivity() {
         val activityLevel = intent.getStringExtra("activityLevel")
         binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
         binding.btnBack.setOnClickListener { finish() }
-        binding.btnCaloric.setOnClickListener { Intent("CALCULATE_CALORIC").let { startActivity(it) } }
+        binding.btnCaloric.setOnClickListener { handleCaloricButtonClick() }
     }
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.title = "Resultado IMC"
     }
+
+    private fun handleCaloricButtonClick() {
+        val itCal = Intent(this, CalculateCaloricActivity::class.java).apply {
+            putExtra("name", intent.getStringExtra("name"))
+            putExtra("activityLevel", intent.getStringExtra("activityLevel"))
+            putExtra("weightKg", intent.getDoubleExtra("weightKg", 0.0))
+            putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
+            putExtra("age", intent.getIntExtra("age", 0))
+            putExtra("sex", intent.getStringExtra("sex"))
+        }
+        startActivity(itCal)
+    }
+
 }
