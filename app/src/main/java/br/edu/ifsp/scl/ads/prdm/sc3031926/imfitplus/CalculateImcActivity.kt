@@ -61,7 +61,6 @@ class CalculateImcActivity : AppCompatActivity() {
             return
         }
 
-        // Se o usuário digitar altura em centímetros (ex: 180)
         if (heightM > 3.0) heightM /= 100.0
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida!", Toast.LENGTH_SHORT).show()

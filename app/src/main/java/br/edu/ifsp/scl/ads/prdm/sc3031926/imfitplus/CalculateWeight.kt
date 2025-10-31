@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,13 @@ class CalculateWeight : AppCompatActivity() {
         }
 
         binding.btnBackIdeal.setOnClickListener { finish() }
+        binding.btnBackHomeIdeal.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish() // opcional, encerra a atual
+        }
+
     }
 
     private fun calculateIdealWeight(heightM: Double): Double {

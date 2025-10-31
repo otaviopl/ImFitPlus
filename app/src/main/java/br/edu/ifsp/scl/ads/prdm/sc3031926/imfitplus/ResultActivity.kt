@@ -19,6 +19,12 @@ class ResultActivity : AppCompatActivity() {
         val activityLevel = intent.getStringExtra("activityLevel")
         binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
         binding.btnBack.setOnClickListener { finish() }
+        binding.btnBackHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
+        }
         binding.btnCaloric.setOnClickListener { handleCaloricButtonClick() }
     }
 
