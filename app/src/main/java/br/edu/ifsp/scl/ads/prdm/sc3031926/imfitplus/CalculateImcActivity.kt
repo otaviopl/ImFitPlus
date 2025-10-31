@@ -48,6 +48,11 @@ class CalculateImcActivity : AppCompatActivity() {
             return
         }
 
+        if (ageInt !in 5..120) {
+            Toast.makeText(this, "A idade deve estar entre 5 e 120 anos!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (name.isEmpty() || weightStr.isEmpty() || heightStr.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
             return
