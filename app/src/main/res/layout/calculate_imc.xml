@@ -52,7 +52,7 @@
         android:id="@+id/inputHeight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Altura (m) ex.: 1,75"
+        android:hint="Altura (m) ex.: 175"
         android:inputType="numberDecimal"
         android:imeOptions="actionNext"
         android:textSize="18sp"
@@ -62,7 +62,6 @@
         app:layout_constraintStart_toStartOf="@id/inputName"
         app:layout_constraintEnd_toEndOf="@id/inputName" />
 
-    <!-- Idade (número) -->
     <EditText
         android:id="@+id/inputAge"
         android:layout_width="0dp"
@@ -77,7 +76,6 @@
         app:layout_constraintStart_toStartOf="@id/inputName"
         app:layout_constraintEnd_toEndOf="@id/inputName" />
 
-    <!-- Nível de atividade -->
     <Spinner
         android:id="@+id/spinnerActivity"
         android:layout_width="0dp"
@@ -87,7 +85,6 @@
         app:layout_constraintStart_toStartOf="@id/inputName"
         app:layout_constraintEnd_toEndOf="@id/inputName" />
 
-    <!-- Sexo -->
     <RadioGroup
         android:id="@+id/inputSex"
         android:layout_width="0dp"

@@ -33,30 +33,39 @@ class CalculateImcActivity : AppCompatActivity() {
     }
 
     private fun handleImcButtonClick() {
-        val name = binding.inputName.text.toString()
-        val weightStr = binding.inputWeight.text.toString()
-        val heightStr = binding.inputHeight.text.toString()
+        val name = binding.inputName.text.toString().trim()
+        val weightStr = binding.inputWeight.text.toString().trim()
+        val heightStr = binding.inputHeight.text.toString().trim()
 
         if (name.isEmpty() || weightStr.isEmpty() || heightStr.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val weight = weightStr.toDoubleOrNull()
-        val height = heightStr.replace(",", ".").toDoubleOrNull()
+        val weight = weightStr.replace(",", ".").toDoubleOrNull()
+        var height = heightStr.replace(",", ".").toDoubleOrNull()
 
-        if (weight == null || height == null || height == 0.0) {
+        if (weight == null || height == null) {
             Toast.makeText(this, "Valores inválidos!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val imc = weight / height.pow(2)
+        if (height > 3.0) height /= 100.0
+
+        if (height <= 0.0) {
+            Toast.makeText(this, "Altura inválida!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val imc = weight / (height * height)
+
         val categoria = when {
             imc < 18.5 -> "Abaixo do peso"
             imc < 25 -> "Normal"
             imc < 30 -> "Sobrepeso"
             else -> "Obesidade"
         }
+
         val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
         val intent = Intent(this, ResultActivity::class.java).apply {
