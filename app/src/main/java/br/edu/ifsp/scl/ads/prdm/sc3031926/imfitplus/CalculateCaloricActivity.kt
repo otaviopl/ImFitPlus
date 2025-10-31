@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,6 @@ import kotlin.math.roundToInt
 
 class CalculateCaloricActivity : AppCompatActivity() {
     private lateinit var binding: CalculateCaloricBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = CalculateCaloricBinding.inflate(layoutInflater)
@@ -42,6 +42,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
             Gasto Calórico Diário (TDEE): ${tdee.roundToInt()} kcal/dia
         """.trimIndent()
 
+        binding.btnIdealWeight.setOnClickListener { handleWeightButtonClick() }
         binding.btnBackCaloric.setOnClickListener { finish() }
     }
 
@@ -50,7 +51,6 @@ class CalculateCaloricActivity : AppCompatActivity() {
         supportActionBar?.title = "Gasto Calórico Diário"
     }
 
-    // Fórmula Mifflin–St Jeor
     private fun calculateBmrReference(
         sex: String,
         weightKg: Double,
@@ -73,5 +73,17 @@ class CalculateCaloricActivity : AppCompatActivity() {
             "intenso"    -> 1.725
             else         -> 1.2
         }
+    }
+
+    private fun handleWeightButtonClick() {
+        val itWeight = Intent(this, CalculateWeight::class.java).apply {
+            putExtra("name", intent.getStringExtra("name"))
+            putExtra("activityLevel", intent.getStringExtra("activityLevel"))
+            putExtra("weightKg", intent.getDoubleExtra("weightKg", 0.0))
+            putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
+            putExtra("age", intent.getIntExtra("age", 0))
+            putExtra("sex", intent.getStringExtra("sex"))
+        }
+        startActivity(itWeight)
     }
 }
