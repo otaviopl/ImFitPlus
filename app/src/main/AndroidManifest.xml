@@ -28,6 +28,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ResultActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="RESULT_IMC"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 
