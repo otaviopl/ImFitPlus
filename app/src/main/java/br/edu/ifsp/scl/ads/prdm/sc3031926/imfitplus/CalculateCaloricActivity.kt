@@ -39,7 +39,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
             Gasto Calórico Diário (TDEE): ${tdee.roundToInt()} kcal/dia
         """.trimIndent()
 
-        binding.btnIdealWeight.setOnClickListener { handleWeightButtonClick() }
+        binding.btnIdealWeight.setOnClickListener { handleWeightButtonClick(bmr, tdee) }
         binding.btnBackCaloric.setOnClickListener { finish() }
     }
 
@@ -62,7 +62,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
     }
 
     private fun activityFactor(level: String): Double {
-        val lv = level.lowercase().replace("á","a") // robusto a acentos
+        val lv = level.lowercase().replace("á","a")
         return when (lv) {
             "sedentario" -> 1.2
             "leve"       -> 1.375
@@ -72,7 +72,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleWeightButtonClick() {
+    private fun handleWeightButtonClick(caloric_category: Double, caloric_spent:Double) {
         val itWeight = Intent(this, CalculateWeight::class.java).apply {
             putExtra("name", intent.getStringExtra("name"))
             putExtra("activityLevel", intent.getStringExtra("activityLevel"))
@@ -80,6 +80,9 @@ class CalculateCaloricActivity : AppCompatActivity() {
             putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
             putExtra("age", intent.getIntExtra("age", 0))
             putExtra("sex", intent.getStringExtra("sex"))
+            putExtra("caloric_category", caloric_category )
+            putExtra("caloric_spent", caloric_spent )
+
         }
         startActivity(itWeight)
     }

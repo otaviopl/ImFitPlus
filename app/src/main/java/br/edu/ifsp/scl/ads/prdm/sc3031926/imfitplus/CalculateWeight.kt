@@ -21,6 +21,9 @@ class CalculateWeight : AppCompatActivity() {
         val name     = intent.getStringExtra("name").orEmpty()
         val heightM  = intent.getDoubleExtra("heightM", 0.0)
         val weightKg = intent.getDoubleExtra("weightKg", 0.0)
+        val imc = intent.getStringExtra("imc")
+        val caloric_spent = intent.getDoubleExtra("caloric_spent")
+        val caloric_category = intent.getDoubleExtra("caloric_category")
 
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida para calcular o peso ideal.", Toast.LENGTH_SHORT).show()
@@ -48,10 +51,27 @@ class CalculateWeight : AppCompatActivity() {
             startActivity(intent)
             finish() // opcional, encerra a atual
         }
+        binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
 
     }
 
     private fun calculateIdealWeight(heightM: Double): Double {
         return 22 * (heightM * heightM)
+    }
+    private fun handleResumeScreenButtonClick() {
+        val itResume = Intent(this, ResumeActivity::class.java).apply {
+            putExtra("name", intent.getStringExtra("name"))
+            putExtra("activityLevel", intent.getStringExtra("activityLevel"))
+            putExtra("weightKg", intent.getDoubleExtra("weightKg", 0.0))
+            putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
+            putExtra("age", intent.getIntExtra("age", 0))
+            putExtra("sex", intent.getStringExtra("sex"))
+            putExtra("imc", intent.getStringExtra("imc"))
+            putExtra("category", intent.getStringExtra("category"))
+            putExtra("idealWeight", intent.getStringExtra("idealWeight"))
+            putExtra("caloric_spent", intent.getStringExtra("caloric_spent"))
+
+        }
+        startActivity(itResume)
     }
 }
