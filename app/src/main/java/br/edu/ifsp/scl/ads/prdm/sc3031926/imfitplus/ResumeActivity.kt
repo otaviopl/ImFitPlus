@@ -17,11 +17,10 @@ class ResumeActivity: AppCompatActivity() {
         val categoria = intent.getStringExtra("categoria")
         val activityLevel = intent.getStringExtra("activityLevel")
         val caloric_spent = intent.getStringExtra("caloric_spent")
+        val water_needed =  intent.getStringExtra("water_nedeed")
         binding.resultText.text =
-            "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
+            "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel\nCalorias gastas diaramente:$caloric_spent\nQuantidade de aguá recomedada: $water_needed"
     }
-
-
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.title = "Resumo da sua saúde!"

@@ -71,6 +71,7 @@ class CalculateWeight : AppCompatActivity() {
             putExtra("idealWeight", intent.getStringExtra("idealWeight"))
             putExtra("caloric_spent", intent.getStringExtra("caloric_spent"))
 
+
         }
         startActivity(itResume)
     }

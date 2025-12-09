@@ -26,7 +26,7 @@ class ResponseActivity : AppCompatActivity() {
             finish()
         }
         binding.btnCaloric.setOnClickListener { handleCaloricButtonClick() }
-        binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
+        // binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
     }
 
     private fun setupToolbar() {
@@ -45,6 +45,7 @@ class ResponseActivity : AppCompatActivity() {
         }
         startActivity(itCal)
     }
+
 
 
 }
