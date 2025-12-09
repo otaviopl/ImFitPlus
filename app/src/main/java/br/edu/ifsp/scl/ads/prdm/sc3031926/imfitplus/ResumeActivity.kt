@@ -24,7 +24,7 @@ class ResumeActivity: AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar.toolbar)
-        supportActionBar?.title = "Resumo da Saúde"
+        supportActionBar?.title = "Resumo da sua saúde!"
     }
 
 }

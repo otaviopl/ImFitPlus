@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.ResultActivityBinding
 
-class ResultActivity : AppCompatActivity() {
+class ResponseActivity : AppCompatActivity() {
     private lateinit var binding: ResultActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -22,8 +22,8 @@ class CalculateWeight : AppCompatActivity() {
         val heightM  = intent.getDoubleExtra("heightM", 0.0)
         val weightKg = intent.getDoubleExtra("weightKg", 0.0)
         val imc = intent.getStringExtra("imc")
-        val caloric_spent = intent.getDoubleExtra("caloric_spent")
-        val caloric_category = intent.getDoubleExtra("caloric_category")
+        // val caloric_spent = intent.getDoubleExtra("caloric_spent")
+        // val caloric_category = intent.getDoubleExtra("caloric_category")
 
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida para calcular o peso ideal.", Toast.LENGTH_SHORT).show()

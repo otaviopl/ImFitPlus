@@ -83,7 +83,7 @@ class CalculateImcActivity : AppCompatActivity() {
             else       -> "Obesidade"
         }
 
-        val intent = Intent(this, ResultActivity::class.java).apply {
+        val intent = Intent(this, ResponseActivity::class.java).apply {
             putExtra("name", name)
             putExtra("activityLevel", activityLevel)
             putExtra("imc", String.format("%.2f", imc))
