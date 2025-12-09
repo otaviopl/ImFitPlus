@@ -23,7 +23,6 @@ class CalculateWeight : AppCompatActivity() {
         val weightKg = intent.getDoubleExtra("weightKg", 0.0)
         val imc = intent.getStringExtra("imc")
         // val caloric_spent = intent.getDoubleExtra("caloric_spent")
-        // val caloric_category = intent.getDoubleExtra("caloric_category")
 
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida para calcular o peso ideal.", Toast.LENGTH_SHORT).show()
@@ -49,7 +48,7 @@ class CalculateWeight : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            finish() // opcional, encerra a atual
+            finish()
         }
         binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
 

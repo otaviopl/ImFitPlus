@@ -6,6 +6,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateImcBinding
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.calculateImc
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.createImcBundle
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.imcCategory
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.isAgeValid
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.normalizeHeightMeters
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.parseNumber
 
 class CalculateImcActivity : AppCompatActivity() {
     private lateinit var binding: CalculateImcBinding
@@ -19,7 +25,6 @@ class CalculateImcActivity : AppCompatActivity() {
         setupSpinner()
         binding.calcImcbtn.setOnClickListener { handleImcButtonClick() }
         binding.btnBack.setOnClickListener { finish() }
-
     }
 
     private fun setupToolbar(binding: CalculateImcBinding) {
@@ -43,13 +48,8 @@ class CalculateImcActivity : AppCompatActivity() {
         val heightStr = binding.inputHeight.text.toString().trim()
         val ageInt = binding.inputAge.text.toString().trim().toIntOrNull()
 
-        if (ageInt == null) {
-            Toast.makeText(this, "Informe uma idade válida!", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (ageInt !in 5..120) {
-            Toast.makeText(this, "A idade deve estar entre 5 e 120 anos!", Toast.LENGTH_SHORT).show()
+        if (!isAgeValid(ageInt)) {
+            Toast.makeText(this, "Informe uma idade válida entre 5 e 120 anos!", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -58,40 +58,31 @@ class CalculateImcActivity : AppCompatActivity() {
             return
         }
 
-        val weightKg = weightStr.replace(",", ".").toDoubleOrNull()
-        var heightM = heightStr.replace(",", ".").toDoubleOrNull()
+        val weightKg = parseNumber(weightStr)
+        val heightM = normalizeHeightMeters(heightStr)
 
         if (weightKg == null || heightM == null) {
             Toast.makeText(this, "Valores inválidos!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (heightM > 3.0) heightM /= 100.0
-        if (heightM <= 0.0) {
-            Toast.makeText(this, "Altura inválida!", Toast.LENGTH_SHORT).show()
-            return
-        }
-
         val sex = if (binding.radioMale.isChecked) "Masculino" else "Feminino"
         val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
-        val imc = weightKg / (heightM * heightM)
-        val categoria = when {
-            imc < 18.5 -> "Abaixo do peso"
-            imc < 25   -> "Normal"
-            imc < 30   -> "Sobrepeso"
-            else       -> "Obesidade"
-        }
+        val imc = calculateImc(weightKg, heightM)
+        val categoria = imcCategory(imc)
 
         val intent = Intent(this, ResponseActivity::class.java).apply {
-            putExtra("name", name)
-            putExtra("activityLevel", activityLevel)
-            putExtra("imc", String.format("%.2f", imc))
-            putExtra("categoria", categoria)
-            putExtra("age", ageInt)
-            putExtra("heightM", heightM)
-            putExtra("weightKg", weightKg)
-            putExtra("sex", sex)
+            putExtras(createImcBundle(
+                name = name,
+                activityLevel = activityLevel,
+                imc = imc,
+                category = categoria,
+                age = ageInt ?: 0,
+                heightM = heightM,
+                weightKg = weightKg,
+                sex = sex
+            ))
         }
 
         startActivity(intent)
