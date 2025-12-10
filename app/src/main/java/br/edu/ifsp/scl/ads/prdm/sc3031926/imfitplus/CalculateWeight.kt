@@ -10,6 +10,18 @@ import kotlin.math.abs
 class CalculateWeight : AppCompatActivity() {
     private lateinit var binding: CalculateWeightBinding
 
+    // guardamos aqui os valores que vamos repassar adiante
+    private var name: String = ""
+    private var activityLevel: String = ""
+    private var weightKg: Double = 0.0
+    private var heightM: Double = 0.0
+    private var age: Int = 0
+    private var sex: String = ""
+    private var imcStr: String? = null
+    private var categoria: String? = null
+    private var ideal: Double = 0.0
+    private var caloricSpent: Double = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = CalculateWeightBinding.inflate(layoutInflater)
@@ -18,11 +30,14 @@ class CalculateWeight : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.title = "Seu peso ideal"
 
-        val name     = intent.getStringExtra("name").orEmpty()
-        val heightM  = intent.getDoubleExtra("heightM", 0.0)
-        val weightKg = intent.getDoubleExtra("weightKg", 0.0)
-        val imc = intent.getStringExtra("imc")
-        // val caloric_spent = intent.getDoubleExtra("caloric_spent")
+        name = intent.getStringExtra("name").orEmpty()
+        activityLevel = intent.getStringExtra("activityLevel").orEmpty()
+        weightKg = intent.getDoubleExtra("weightKg", 0.0)
+        heightM = intent.getDoubleExtra("heightM", 0.0)
+        age = intent.getIntExtra("age", 0)
+        sex = intent.getStringExtra("sex").orEmpty()
+        imcStr = intent.getStringExtra("imc")
+        caloricSpent = intent.getDoubleExtra("caloric_spent", 0.0)
 
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida para calcular o peso ideal.", Toast.LENGTH_SHORT).show()
@@ -30,7 +45,7 @@ class CalculateWeight : AppCompatActivity() {
             return
         }
 
-        val ideal = calculateIdealWeight(heightM)
+        ideal = calculateIdealWeight(heightM)
         val delta = if (weightKg > 0) ideal - weightKg else null
 
         binding.tvIdealResult.text = buildString {
@@ -51,26 +66,24 @@ class CalculateWeight : AppCompatActivity() {
             finish()
         }
         binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
-
     }
 
     private fun calculateIdealWeight(heightM: Double): Double {
         return 22 * (heightM * heightM)
     }
+
     private fun handleResumeScreenButtonClick() {
         val itResume = Intent(this, ResumeActivity::class.java).apply {
-            putExtra("name", intent.getStringExtra("name"))
-            putExtra("activityLevel", intent.getStringExtra("activityLevel"))
-            putExtra("weightKg", intent.getDoubleExtra("weightKg", 0.0))
-            putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
-            putExtra("age", intent.getIntExtra("age", 0))
-            putExtra("sex", intent.getStringExtra("sex"))
-            putExtra("imc", intent.getStringExtra("imc"))
-            putExtra("category", intent.getStringExtra("category"))
-            putExtra("idealWeight", intent.getStringExtra("idealWeight"))
-            putExtra("caloric_spent", intent.getStringExtra("caloric_spent"))
-
-
+            putExtra("name", name)
+            putExtra("activityLevel", activityLevel)
+            putExtra("weightKg", weightKg)
+            putExtra("heightM", heightM)
+            putExtra("age", age)
+            putExtra("sex", sex)
+            putExtra("imc", imcStr)
+            putExtra("category", categoria)
+            putExtra("idealWeight", ideal)
+            putExtra("caloric_spent", caloricSpent)
         }
         startActivity(itResume)
     }

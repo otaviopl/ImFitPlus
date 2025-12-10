@@ -45,7 +45,4 @@ class ResponseActivity : AppCompatActivity() {
         }
         startActivity(itCal)
     }
-
-
-
 }

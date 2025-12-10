@@ -53,7 +53,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
             putExtra("age", intent.getIntExtra("age", 0))
             putExtra("sex", intent.getStringExtra("sex"))
             putExtra("caloric_category", caloric_category)
-            putExtra("caloric_spent", caloric_spent)
+            putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent",caloric_spent))
         }
         startActivity(itWeight)
     }
