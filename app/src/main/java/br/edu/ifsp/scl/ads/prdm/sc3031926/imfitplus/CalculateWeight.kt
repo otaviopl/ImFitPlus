@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateWeightBinding
 import kotlin.math.abs
-//TODO adicionar botao de voltar
 class CalculateWeight : AppCompatActivity() {
     private lateinit var binding: CalculateWeightBinding
     private var name: String = ""
@@ -15,7 +14,6 @@ class CalculateWeight : AppCompatActivity() {
     private var heightM: Double = 0.0
     private var age: Int = 0
     private var sex: String = ""
-    private var categoria: String? = null
     private var ideal: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +72,7 @@ class CalculateWeight : AppCompatActivity() {
             putExtra("heightM", heightM)
             putExtra("age", age)
             putExtra("sex", sex)
-            putExtra("category", categoria)
+            putExtra("category", intent.getStringExtra("category").orEmpty())
             putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent", 0.0))
             putExtra( "imc",intent.getStringExtra("imc").orEmpty())
         }

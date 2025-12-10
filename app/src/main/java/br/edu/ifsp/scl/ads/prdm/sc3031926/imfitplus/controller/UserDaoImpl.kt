@@ -1,0 +1,59 @@
+package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.controller
+
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Context
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.db.DatabaseHelper
+import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.model.User
+
+class UserDaoImpl(context: Context) : UserDao {
+
+    private val dbHelper = DatabaseHelper(context)
+
+    override fun insert(user: User): Long {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put("name", user.name)
+            put("age", user.age)
+            put("weight", user.weight)
+            put("height", user.height)
+            put("gender", user.gender)
+            put("sportsLevel", user.sportsLevel)
+            put("imc", user.imc)
+            put("imcCategory", user.imcCategory)
+            put("baseCalories", user.baseCalories)
+            put("idealWeight", user.idealWeight)
+            put("waterConsumption", user.waterConsumption)
+        }
+        val id = db.insert("user", null, values)
+        db.close()
+        return id
+    }
+
+    @SuppressLint("Range")
+    override fun getLatestUser(): User? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query("user", null, null, null, null, null, "id DESC", "1")
+        var user: User? = null
+        if (cursor.moveToFirst()) {
+            user = User(
+                id = cursor.getLong(cursor.getColumnIndex("id")),
+                name = cursor.getString(cursor.getColumnIndex("name")),
+                age = cursor.getInt(cursor.getColumnIndex("age")),
+                weight = cursor.getDouble(cursor.getColumnIndex("weight")),
+                height = cursor.getDouble(cursor.getColumnIndex("height")),
+                gender = cursor.getString(cursor.getColumnIndex("gender")),
+                sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
+                imc = cursor.getString(cursor.getColumnIndex("imc")),
+                imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
+                baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
+                idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
+                waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
+                createdAt = cursor.getString(cursor.getColumnIndex("createdAt"))
+            )
+        }
+        cursor.close()
+        db.close()
+        return user
+    }
+}

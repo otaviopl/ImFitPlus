@@ -21,7 +21,6 @@ class CalculateCaloricActivity : AppCompatActivity() {
     private var activityLevel: String = ""
     private var bmr: Double = 0.0
     private var tdee: Double = 0.0
-    private var caloricCategory: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +46,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
         bmr = calculateBmrReference(sex, weightKg, heightM, age)
         tdee = calculateTdeeFromLevel(bmr, activityLevel)
 
-        caloricCategory = when {
-            tdee < 1500 -> "Baixo"
-            tdee < 2500 -> "Moderado"
-            else -> "Alto"
-        }
-
-        binding.tvCaloricResult.text = formatCaloricResult(name, bmr, activityLevel)
+        binding.tvCaloricResult.text = formatCaloricResult(name, bmr)
         binding.btnIdealWeight.setOnClickListener { handleWeightButtonClick() }
         binding.btnBackCaloric.setOnClickListener { finish() }
     }
@@ -72,7 +65,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
             putExtra("age", age)
             putExtra("sex", sex)
             putExtra("imc", intent.getStringExtra("imc"))
-            putExtra("categoria", caloricCategory)
+            putExtra("category", intent.getStringExtra("category"))
             putExtra("caloric_spent", tdee)
         }
         startActivity(itWeight)

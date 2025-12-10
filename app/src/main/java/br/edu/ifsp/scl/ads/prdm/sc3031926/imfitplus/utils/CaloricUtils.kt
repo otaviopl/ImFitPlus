@@ -15,10 +15,6 @@ object CaloricUtils {
         }
     }
 
-    fun formatCalories(value: Double): String {
-        return "${value.toInt()} kcal/dia"
-    }
-
     fun activityFactor(level: String): Double {
         val lv = level.lowercase()
             .replace("á", "a")

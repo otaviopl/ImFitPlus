@@ -70,14 +70,13 @@ class CalculateImcActivity : AppCompatActivity() {
         val activityLevel = binding.spinnerActivity.selectedItem.toString()
 
         val imc = calculateImc(weightKg, heightM)
-        val categoria = imcCategory(imc)
 
         val intent = Intent(this, ResponseActivity::class.java).apply {
             putExtras(createImcBundle(
                 name = name,
                 activityLevel = activityLevel,
                 imc = imc,
-                category = categoria,
+                category = imcCategory(imc),
                 age = ageInt ?: 0,
                 heightM = heightM,
                 weightKg = weightKg,
