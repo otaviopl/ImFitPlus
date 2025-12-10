@@ -4,13 +4,19 @@ import kotlin.math.roundToInt
 
 object CaloricUtils {
     fun calculateBmrReference(sex: String, weightKg: Double, heightM: Double, age: Int): Double {
-        return if (sex.equals("Masculino", ignoreCase = true) ||
+        return if (
+            sex.equals("Masculino", ignoreCase = true) ||
             sex.equals("M", ignoreCase = true) ||
-            sex.equals("MALE", ignoreCase = true)) {
+            sex.equals("MALE", ignoreCase = true)
+        ) {
             66 + (13.7 * weightKg) + (5 * heightM * 100) - (6.8 * age)
         } else {
             655 + (9.6 * weightKg) + (1.8 * heightM * 100) - (4.7 * age)
         }
+    }
+
+    fun formatCalories(value: Double): String {
+        return "${value.toInt()} kcal/dia"
     }
 
     fun activityFactor(level: String): Double {
@@ -35,17 +41,17 @@ object CaloricUtils {
         return bmr * factor
     }
 
-    fun formatCaloricResult(name: String, bmr: Double, activityLevel: String, tdee: Double): String {
+    fun formatCaloricResult(name: String, bmr: Double, activityLevel: String): String {
         return """
         Olá, $name!
         TMB (Taxa Metabólica Basal): ${bmr.roundToInt()} kcal/dia
         Fator de atividade ($activityLevel): ${"%.3f".format(activityFactor(activityLevel))}
-        Gasto Calórico Diário (TDEE): ${tdee.roundToInt()} kcal/dia
     """.trimIndent()
     }
 
     fun idealWeightFromHeightM(heightM: Double, targetImc: Double = 22.0): Double {
         return targetImc * (heightM * heightM)
     }
+
 
 }

@@ -26,7 +26,6 @@ class ResponseActivity : AppCompatActivity() {
             finish()
         }
         binding.btnCaloric.setOnClickListener { handleCaloricButtonClick() }
-        // binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
     }
 
     private fun setupToolbar() {
@@ -42,6 +41,7 @@ class ResponseActivity : AppCompatActivity() {
             putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
             putExtra("age", intent.getIntExtra("age", 0))
             putExtra("sex", intent.getStringExtra("sex"))
+            putExtra("imc", intent.getStringExtra("imc"))
         }
         startActivity(itCal)
     }

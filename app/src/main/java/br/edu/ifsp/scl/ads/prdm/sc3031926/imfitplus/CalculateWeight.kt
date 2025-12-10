@@ -6,21 +6,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateWeightBinding
 import kotlin.math.abs
-
+//TODO adicionar botao de voltar
 class CalculateWeight : AppCompatActivity() {
     private lateinit var binding: CalculateWeightBinding
-
-    // guardamos aqui os valores que vamos repassar adiante
     private var name: String = ""
     private var activityLevel: String = ""
     private var weightKg: Double = 0.0
     private var heightM: Double = 0.0
     private var age: Int = 0
     private var sex: String = ""
-    private var imcStr: String? = null
     private var categoria: String? = null
     private var ideal: Double = 0.0
-    private var caloricSpent: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +27,11 @@ class CalculateWeight : AppCompatActivity() {
         supportActionBar?.title = "Seu peso ideal"
 
         name = intent.getStringExtra("name").orEmpty()
-        activityLevel = intent.getStringExtra("activityLevel").orEmpty()
+        sex = intent.getStringExtra("sex").orEmpty()
+        age = intent.getIntExtra("age", 0)
         weightKg = intent.getDoubleExtra("weightKg", 0.0)
         heightM = intent.getDoubleExtra("heightM", 0.0)
-        age = intent.getIntExtra("age", 0)
-        sex = intent.getStringExtra("sex").orEmpty()
-        imcStr = intent.getStringExtra("imc")
-        caloricSpent = intent.getDoubleExtra("caloric_spent", 0.0)
+        activityLevel = intent.getStringExtra("activityLevel").orEmpty()
 
         if (heightM <= 0.0) {
             Toast.makeText(this, "Altura inválida para calcular o peso ideal.", Toast.LENGTH_SHORT).show()
@@ -65,26 +59,25 @@ class CalculateWeight : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        binding.resumeScreenbtn.setOnClickListener { handleResumeScreenButtonClick() }
+        binding.resumeScreenbtn.setOnClickListener { handleWeightButtonClick() }
     }
 
     private fun calculateIdealWeight(heightM: Double): Double {
         return 22 * (heightM * heightM)
     }
 
-    private fun handleResumeScreenButtonClick() {
-        val itResume = Intent(this, ResumeActivity::class.java).apply {
+    private fun handleWeightButtonClick() {
+        val itWeight = Intent(this, ResumeActivity::class.java).apply {
             putExtra("name", name)
             putExtra("activityLevel", activityLevel)
             putExtra("weightKg", weightKg)
             putExtra("heightM", heightM)
             putExtra("age", age)
             putExtra("sex", sex)
-            putExtra("imc", imcStr)
             putExtra("category", categoria)
-            putExtra("idealWeight", ideal)
-            putExtra("caloric_spent", caloricSpent)
+            putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent", 0.0))
+            putExtra( "imc",intent.getStringExtra("imc").orEmpty())
         }
-        startActivity(itResume)
+        startActivity(itWeight)
     }
 }
