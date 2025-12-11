@@ -7,17 +7,22 @@ import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.ResultActivityBi
 
 class ResponseActivity : AppCompatActivity() {
     private lateinit var binding: ResultActivityBinding
+    private var category: String? = ""
+    private var imc: String? = ""
+    private var name: String? = ""
+    private var activityLevel: String? = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ResultActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
-        val name = intent.getStringExtra("name")
-        val imc = intent.getStringExtra("imc")
-        val categoria = intent.getStringExtra("categoria")
-        val activityLevel = intent.getStringExtra("activityLevel")
-        binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $categoria\nNível de Atividade: $activityLevel"
+        name = intent.getStringExtra("name")
+        imc = intent.getStringExtra("imc")
+        category = intent.getStringExtra("categoria")
+        activityLevel = intent.getStringExtra("activityLevel")
+        binding.resultText.text = "Nome: $name\nIMC: $imc\nCategoria: $category\nNível de Atividade: $activityLevel"
         binding.btnBack.setOnClickListener { finish() }
         binding.btnBackHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -35,13 +40,14 @@ class ResponseActivity : AppCompatActivity() {
 
     private fun handleCaloricButtonClick() {
         val itCal = Intent(this, CalculateCaloricActivity::class.java).apply {
-            putExtra("name", intent.getStringExtra("name"))
-            putExtra("activityLevel", intent.getStringExtra("activityLevel"))
+            putExtra("name", name)
+            putExtra("activityLevel", activityLevel)
             putExtra("weightKg", intent.getDoubleExtra("weightKg", 0.0))
             putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
             putExtra("age", intent.getIntExtra("age", 0))
             putExtra("sex", intent.getStringExtra("sex"))
-            putExtra("imc", intent.getStringExtra("imc"))
+            putExtra("imc", imc)
+            putExtra("category", category)
         }
         startActivity(itCal)
     }

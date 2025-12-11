@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.controller
+package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.db.dao
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -6,11 +6,11 @@ import android.content.Context
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.db.DatabaseHelper
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.model.User
 
-class UserDaoImpl(context: Context) : UserDao {
+class UserDao(context: Context) {
 
     private val dbHelper = DatabaseHelper(context)
 
-    override fun insert(user: User): Long {
+    fun insert(user: User): Long {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
             put("name", user.name)
@@ -31,7 +31,7 @@ class UserDaoImpl(context: Context) : UserDao {
     }
 
     @SuppressLint("Range")
-    override fun getLatestUser(): User? {
+    fun getLatestUser(): User? {
         val db = dbHelper.readableDatabase
         val cursor = db.query("user", null, null, null, null, null, "id DESC", "1")
         var user: User? = null

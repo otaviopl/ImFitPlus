@@ -57,21 +57,22 @@ class CalculateWeight : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        binding.resumeScreenbtn.setOnClickListener { handleWeightButtonClick() }
+        binding.resumeScreenbtn.setOnClickListener { handleResumeButtonClick() }
     }
 
     private fun calculateIdealWeight(heightM: Double): Double {
         return 22 * (heightM * heightM)
     }
 
-    private fun handleWeightButtonClick() {
+    private fun handleResumeButtonClick() {
         val itWeight = Intent(this, ResumeActivity::class.java).apply {
             putExtra("name", name)
             putExtra("activityLevel", activityLevel)
             putExtra("weightKg", weightKg)
+            putExtra("idealWeight", ideal.toString())
             putExtra("heightM", heightM)
             putExtra("age", age)
-            putExtra("sex", sex)
+            putExtra("gender", sex)
             putExtra("category", intent.getStringExtra("category").orEmpty())
             putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent", 0.0))
             putExtra( "imc",intent.getStringExtra("imc").orEmpty())

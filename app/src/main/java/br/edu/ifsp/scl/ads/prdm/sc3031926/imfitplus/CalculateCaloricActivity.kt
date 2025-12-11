@@ -46,7 +46,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
         bmr = calculateBmrReference(sex, weightKg, heightM, age)
         tdee = calculateTdeeFromLevel(bmr, activityLevel)
 
-        binding.tvCaloricResult.text = formatCaloricResult(name, bmr)
+        binding.tvCaloricResult.text = formatCaloricResult(name, bmr, activityLevel)
         binding.btnIdealWeight.setOnClickListener { handleWeightButtonClick() }
         binding.btnBackCaloric.setOnClickListener { finish() }
     }
