@@ -21,6 +21,7 @@ class UserDao(context: Context) {
             put("sportsLevel", user.sportsLevel)
             put("imc", user.imc)
             put("imcCategory", user.imcCategory)
+            put("metabolicMetric", user.metabolicalMetric)
             put("baseCalories", user.baseCalories)
             put("idealWeight", user.idealWeight)
             put("waterConsumption", user.waterConsumption)
@@ -31,9 +32,18 @@ class UserDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getLatestUser(): User? {
+    fun getLatestUserByName(name: String): User? {
         val db = dbHelper.readableDatabase
-        val cursor = db.query("user", null, null, null, null, null, "id DESC", "1")
+        val cursor = db.query(
+            "user",
+            null,
+            "name = ?",
+            arrayOf(name),
+            null,
+            null,
+            "id DESC",
+            "1"
+        )
         var user: User? = null
         if (cursor.moveToFirst()) {
             user = User(
@@ -46,6 +56,7 @@ class UserDao(context: Context) {
                 sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
                 imc = cursor.getString(cursor.getColumnIndex("imc")),
                 imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
+                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
                 baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
                 idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
                 waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
@@ -55,5 +66,73 @@ class UserDao(context: Context) {
         cursor.close()
         db.close()
         return user
+    }
+
+    @SuppressLint("Range")
+    fun getUsersByName(name: String): List<User> {
+        val users = mutableListOf<User>()
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            "user",
+            null,
+            "name = ?",
+            arrayOf(name),
+            null,
+            null,
+            "id DESC"
+        )
+
+        while (cursor.moveToNext()) {
+            val userResult = User(
+                id = cursor.getLong(cursor.getColumnIndex("id")),
+                name = cursor.getString(cursor.getColumnIndex("name")),
+                age = cursor.getInt(cursor.getColumnIndex("age")),
+                weight = cursor.getDouble(cursor.getColumnIndex("weight")),
+                height = cursor.getDouble(cursor.getColumnIndex("height")),
+                gender = cursor.getString(cursor.getColumnIndex("gender")),
+                sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
+                imc = cursor.getString(cursor.getColumnIndex("imc")),
+                imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
+                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
+                baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
+                idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
+                waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
+                createdAt = cursor.getString(cursor.getColumnIndex("createdAt"))
+            )
+            users.add(userResult)
+        }
+        cursor.close()
+        db.close()
+        return users
+    }
+
+    @SuppressLint("Range")
+    fun getAllUsers(): List<User> {
+        val users = mutableListOf<User>()
+        val db = dbHelper.readableDatabase
+        val cursor = db.query("user", null, null, null, null, null, "id DESC")
+
+        while (cursor.moveToNext()) {
+            val user = User(
+                id = cursor.getLong(cursor.getColumnIndex("id")),
+                name = cursor.getString(cursor.getColumnIndex("name")),
+                age = cursor.getInt(cursor.getColumnIndex("age")),
+                weight = cursor.getDouble(cursor.getColumnIndex("weight")),
+                height = cursor.getDouble(cursor.getColumnIndex("height")),
+                gender = cursor.getString(cursor.getColumnIndex("gender")),
+                sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
+                imc = cursor.getString(cursor.getColumnIndex("imc")),
+                imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
+                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
+                baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
+                idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
+                waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
+                createdAt = cursor.getString(cursor.getColumnIndex("createdAt"))
+            )
+            users.add(user)
+        }
+        cursor.close()
+        db.close()
+        return users
     }
 }

@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.db.dao.UserDao
@@ -53,6 +54,7 @@ class ResumeActivity : AppCompatActivity() {
         userDao.insert(user)
 
         binding.btnBack.setOnClickListener { finish() }
+        binding.btnHistory.setOnClickListener { handleHistoryButtonClick() }
     }
 
     private fun setupToolbar() {
@@ -64,5 +66,10 @@ class ResumeActivity : AppCompatActivity() {
         if (weight == null) return 0.0
         val result = 0.035 * weight
         return String.format("%.2f", result).toDouble()
+    }
+
+    private fun handleHistoryButtonClick() {
+        val intent = Intent(this, HistoryScreen::class.java)
+        startActivity(intent)
     }
 }
