@@ -67,6 +67,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
             putExtra("imc", intent.getStringExtra("imc"))
             putExtra("category", intent.getStringExtra("category"))
             putExtra("caloric_spent", tdee)
+            putExtra("metabolicalMetric", bmr)
         }
         startActivity(itWeight)
     }

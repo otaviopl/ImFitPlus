@@ -28,6 +28,8 @@ class ResumeActivity : AppCompatActivity() {
         val waterNeeded = calculateWaterNeeded(weight)
         val formatedIdealWeight = "%.2f".format(idealWeight)
         val formatedCalories = "%.2f".format(caloricSpent)
+        val metabolicalMetric = intent.getDoubleExtra("metabolicMetric", 0.0)
+
         // Exibindo o resumo na tela
         binding.resultText.text =
             "Nome: $name\nIMC: $imc\nNível de Atividade: $activityLevel\nCalorias gastas diariamente:$formatedCalories\nQuantidade de aguá recomedada: $waterNeeded L\n Categoria do seu IMC: $imcCategory"

@@ -76,6 +76,7 @@ class CalculateWeight : AppCompatActivity() {
             putExtra("category", intent.getStringExtra("category").orEmpty())
             putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent", 0.0))
             putExtra( "imc",intent.getStringExtra("imc").orEmpty())
+            putExtra("metabolicMetric", intent.getDoubleExtra("metabolicalMetric", 0.0))
         }
         startActivity(itWeight)
     }
