@@ -4,6 +4,7 @@ data class User(
     val id: Long? = null,
     val bithdayDate: String,
     val age: Int,
+    val maxCardiac: Int,
     val name: String,
     val weight: Double,
     val height: Double,

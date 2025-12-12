@@ -16,6 +16,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             CREATE TABLE user (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 age INTEGER NOT NULL,
+                maxCardiac INTEGER NOT NULL,
                 name TEXT NOT NULL,
                 weight REAL NOT NULL,
                 height REAL NOT NULL,

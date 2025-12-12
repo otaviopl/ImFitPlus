@@ -40,10 +40,10 @@ class ResumeActivity : AppCompatActivity() {
         // Exibindo o resumo na tela
         binding.resultText.text =
             "Nome: $name\nIMC: $imc\nNível de Atividade: $activityLevel\nCalorias gastas diariamente:$formatedCalories\nQuantidade de aguá recomedada: $waterNeeded L\n Categoria do seu IMC: $imcCategory\nFrequencia cardiaca maxima:$maxCardiacTax\nZona leve de treino vai de $fiftyTax até $sixtyTax batimentos cardiacos\nA queima de gordura vai começar em $sixtyTax até $seventyTax batimentos cardiacos\nZona aeróbica vai de $seventyTax até $eightyTax batimentos cardiacos\nSua zona anaerobica vai de $eightyTax até $ninety batimentos cardiacos"
-
         val user = User(
             name = name,
             bithdayDate = ageLocalDate,
+            maxCardiac = maxCardiacTax,
             age = age,
             weight = weight,
             height = height,
