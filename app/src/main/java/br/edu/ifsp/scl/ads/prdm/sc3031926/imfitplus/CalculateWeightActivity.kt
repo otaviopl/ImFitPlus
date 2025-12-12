@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.CalculateWeightBinding
 import kotlin.math.abs
-class CalculateWeight : AppCompatActivity() {
+class CalculateWeightActivity : AppCompatActivity() {
     private lateinit var binding: CalculateWeightBinding
     private var name: String = ""
     private var activityLevel: String = ""

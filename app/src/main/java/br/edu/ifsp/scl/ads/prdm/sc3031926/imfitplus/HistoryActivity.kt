@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.HistoryScreenBinding
-import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.databinding.ResultActivityBinding
 
+data class gora
 class HistoryScreen : AppCompatActivity() {
     private lateinit var binding: HistoryScreenBinding
 

@@ -57,7 +57,7 @@ class CalculateCaloricActivity : AppCompatActivity() {
     }
 
     private fun handleWeightButtonClick() {
-        val itWeight = Intent(this, CalculateWeight::class.java).apply {
+        val itWeight = Intent(this, CalculateWeightActivity::class.java).apply {
             putExtra("name", name)
             putExtra("activityLevel", activityLevel)
             putExtra("weightKg", weightKg)
