@@ -40,7 +40,7 @@ object ImcUtils {
     }
 
     fun formatImc(imc: Double): String {
-        return String.format(Locale.ENGLISH, "%s", imc)
+        return String.format(Locale.ENGLISH, "%.2f", imc)
     }
 
     fun createImcBundle(
