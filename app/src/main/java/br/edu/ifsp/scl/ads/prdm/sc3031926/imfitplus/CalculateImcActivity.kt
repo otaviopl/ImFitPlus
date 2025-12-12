@@ -12,6 +12,8 @@ import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.imcCategory
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.isAgeValid
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.normalizeHeightMeters
 import br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils.ImcUtils.parseNumber
+import java.time.LocalDate
+import java.time.Period
 
 class CalculateImcActivity : AppCompatActivity() {
     private lateinit var binding: CalculateImcBinding
@@ -41,12 +43,18 @@ class CalculateImcActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerActivity.adapter = adapter
     }
+    private fun calculateAgeBydate(birthDate: LocalDate):Int{
+        val actualDate = LocalDate.now()
+        return Period.between(birthDate, actualDate).years
+    }
 
     private fun handleImcButtonClick() {
+        val ageForm = binding.inputAge.text.toString().trim()
+        val ageLocalDate = LocalDate.parse(ageForm)
         val name = binding.inputName.text.toString().trim()
         val weightStr = binding.inputWeight.text.toString().trim()
         val heightStr = binding.inputHeight.text.toString().trim()
-        val ageInt = binding.inputAge.text.toString().trim().toIntOrNull()
+        val ageInt = calculateAgeBydate(ageLocalDate)
 
         if (!isAgeValid(ageInt)) {
             Toast.makeText(this, "Informe uma idade válida entre 5 e 120 anos!", Toast.LENGTH_SHORT).show()
@@ -74,6 +82,7 @@ class CalculateImcActivity : AppCompatActivity() {
         val intent = Intent(this, ResponseActivity::class.java).apply {
             putExtras(createImcBundle(
                 name = name,
+                ageLocalDate = ageLocalDate,
                 activityLevel = activityLevel,
                 imc = imc,
                 category = imcCategory(imc),

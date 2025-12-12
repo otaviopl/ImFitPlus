@@ -29,14 +29,21 @@ class ResumeActivity : AppCompatActivity() {
         val waterNeeded = calculateWaterNeeded(weight)
         val formatedIdealWeight = "%.2f".format(idealWeight.toDoubleOrNull() ?: 0.0)
         val formatedCalories = "%.2f".format(caloricSpent)
-        val metabolicalMetric = intent.getDoubleExtra("metabolicMetric", 0.0)
+        val ageLocalDate =  intent.getStringExtra("ageLocalDate").orEmpty()
+        val maxCardiacTax = calculateMaxCardiac(age)
+        val sixtyTax =  1.6 * maxCardiacTax
+        val fiftyTax = 1.5 * maxCardiacTax
+        val seventyTax = 1.7 * maxCardiacTax
+        val eightyTax = 1.8 * maxCardiacTax
+        val ninety =  1.9 * maxCardiacTax
 
         // Exibindo o resumo na tela
         binding.resultText.text =
-            "Nome: $name\nIMC: $imc\nNível de Atividade: $activityLevel\nCalorias gastas diariamente:$formatedCalories\nQuantidade de aguá recomedada: $waterNeeded L\n Categoria do seu IMC: $imcCategory"
+            "Nome: $name\nIMC: $imc\nNível de Atividade: $activityLevel\nCalorias gastas diariamente:$formatedCalories\nQuantidade de aguá recomedada: $waterNeeded L\n Categoria do seu IMC: $imcCategory\nFrequencia cardiaca maxima:$maxCardiacTax\nZona leve de treino vai de $fiftyTax até $sixtyTax batimentos cardiacos\nA queima de gordura vai começar em $sixtyTax até $seventyTax batimentos cardiacos\nZona aeróbica vai de $seventyTax até $eightyTax batimentos cardiacos\nSua zona anaerobica vai de $eightyTax até $ninety batimentos cardiacos"
 
         val user = User(
             name = name,
+            bithdayDate = ageLocalDate,
             age = age,
             weight = weight,
             height = height,
@@ -65,6 +72,10 @@ class ResumeActivity : AppCompatActivity() {
         if (weight == null) return 0.0
         val result = 0.035 * weight
         return String.format("%.2f", result).toDouble()
+    }
+
+    private fun calculateMaxCardiac(age:Int):Int{
+        return 220 - age
     }
 
     private fun handleHistoryButtonClick() {

@@ -46,6 +46,7 @@ class ResponseActivity : AppCompatActivity() {
             putExtra("heightM", intent.getDoubleExtra("heightM", 0.0))
             putExtra("age", intent.getIntExtra("age", 0))
             putExtra("sex", intent.getStringExtra("sex"))
+            putExtra("ageLocalDate", intent.getStringExtra("ageLocalDate"))
             putExtra("imc", imc)
             putExtra("category", category)
         }

@@ -73,6 +73,7 @@ class CalculateWeightActivity : AppCompatActivity() {
             putExtra("heightM", heightM)
             putExtra("age", age)
             putExtra("gender", sex)
+            putExtra("ageLocalDate",intent.getStringExtra("ageLocalDate"))
             putExtra("category", intent.getStringExtra("category").orEmpty())
             putExtra("caloric_spent", intent.getDoubleExtra("caloric_spent", 0.0))
             putExtra( "imc",intent.getStringExtra("imc").orEmpty())

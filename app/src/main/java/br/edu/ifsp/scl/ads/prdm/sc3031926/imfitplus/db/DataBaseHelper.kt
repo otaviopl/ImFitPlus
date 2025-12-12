@@ -22,6 +22,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 gender TEXT NOT NULL,
                 sportsLevel TEXT NOT NULL,
                 imc TEXT NOT NULL,
+                bithdayDate TEXT NOT NULL,
                 imcCategory TEXT NOT NULL,
                 baseCalories TEXT NOT NULL,
                 idealWeight TEXT NOT NULL,

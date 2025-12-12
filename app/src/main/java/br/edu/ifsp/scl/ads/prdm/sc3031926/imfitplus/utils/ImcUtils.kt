@@ -1,6 +1,7 @@
 package br.edu.ifsp.scl.ads.prdm.sc3031926.imfitplus.utils
 
 import android.os.Bundle
+import java.time.LocalDate
 import java.util.Locale
 
 object ImcUtils {
@@ -45,6 +46,7 @@ object ImcUtils {
 
     fun createImcBundle(
         name: String,
+        ageLocalDate: LocalDate,
         activityLevel: String,
         imc: Double,
         category: String,

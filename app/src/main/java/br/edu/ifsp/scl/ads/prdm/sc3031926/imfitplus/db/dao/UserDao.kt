@@ -14,6 +14,7 @@ class UserDao(context: Context) {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
             put("name", user.name)
+            put("bithDate", user.bithdayDate)
             put("age", user.age)
             put("weight", user.weight)
             put("height", user.height)
@@ -48,6 +49,7 @@ class UserDao(context: Context) {
             user = User(
                 id = cursor.getLong(cursor.getColumnIndex("id")),
                 name = cursor.getString(cursor.getColumnIndex("name")),
+                bithdayDate = cursor.getString(cursor.getColumnIndex("birthdate")),
                 age = cursor.getInt(cursor.getColumnIndex("age")),
                 weight = cursor.getDouble(cursor.getColumnIndex("weight")),
                 height = cursor.getDouble(cursor.getColumnIndex("height")),
@@ -84,6 +86,7 @@ class UserDao(context: Context) {
             val userResult = User(
                 id = cursor.getLong(cursor.getColumnIndex("id")),
                 name = cursor.getString(cursor.getColumnIndex("name")),
+                bithdayDate = cursor.getString(cursor.getColumnIndex("birthDate")),
                 age = cursor.getInt(cursor.getColumnIndex("age")),
                 weight = cursor.getDouble(cursor.getColumnIndex("weight")),
                 height = cursor.getDouble(cursor.getColumnIndex("height")),
@@ -113,6 +116,7 @@ class UserDao(context: Context) {
             val user = User(
                 id = cursor.getLong(cursor.getColumnIndex("id")),
                 name = cursor.getString(cursor.getColumnIndex("name")),
+                bithdayDate = cursor.getString(cursor.getColumnIndex("birthDate")),
                 age = cursor.getInt(cursor.getColumnIndex("age")),
                 weight = cursor.getDouble(cursor.getColumnIndex("weight")),
                 height = cursor.getDouble(cursor.getColumnIndex("height")),

@@ -67,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Idade"
-        android:inputType="number"
+        android:inputType="datetime"
         android:imeOptions="actionNext"
         android:textSize="18sp"
         android:gravity="center"
