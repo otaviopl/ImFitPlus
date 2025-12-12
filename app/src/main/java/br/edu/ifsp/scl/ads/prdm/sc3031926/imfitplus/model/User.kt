@@ -11,7 +11,6 @@ data class User(
     val imc: String,
     val imcCategory: String,
     val baseCalories: String,
-    val metabolicalMetric: Double,
     val idealWeight: String,
     val waterConsumption: String,
     val createdAt: String? = null

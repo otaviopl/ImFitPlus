@@ -27,7 +27,7 @@ class ResumeActivity : AppCompatActivity() {
         val caloricSpent = intent.getDoubleExtra("caloric_spent", 0.0)
         val idealWeight = intent.getStringExtra("idealWeight") ?: ""
         val waterNeeded = calculateWaterNeeded(weight)
-        val formatedIdealWeight = "%.2f".format(idealWeight)
+        val formatedIdealWeight = "%.2f".format(idealWeight.toDoubleOrNull() ?: 0.0)
         val formatedCalories = "%.2f".format(caloricSpent)
         val metabolicalMetric = intent.getDoubleExtra("metabolicMetric", 0.0)
 
@@ -44,7 +44,6 @@ class ResumeActivity : AppCompatActivity() {
             sportsLevel = activityLevel,
             imc = imc,
             imcCategory = imcCategory,
-            metabolicalMetric = metabolicalMetric,
             baseCalories = formatedCalories.toString(),
             idealWeight = formatedIdealWeight,
             waterConsumption = waterNeeded.toString()
@@ -69,7 +68,7 @@ class ResumeActivity : AppCompatActivity() {
     }
 
     private fun handleHistoryButtonClick() {
-        val intent = Intent(this, HistoryScreen::class.java)
+        val intent = Intent(this, UserHistoryAcvity::class.java)
         startActivity(intent)
     }
 }

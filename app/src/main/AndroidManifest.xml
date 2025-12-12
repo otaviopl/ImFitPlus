@@ -52,7 +52,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".HistoryActivity" android:exported="true">
+        <activity android:name=".UserHistoryAcvity" android:exported="true">
             <intent-filter>
                 <action android:name="HISTORY_SCREEN"/>
                 <category android:name="android.intent.category.DEFAULT"/>

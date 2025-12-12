@@ -21,7 +21,6 @@ class UserDao(context: Context) {
             put("sportsLevel", user.sportsLevel)
             put("imc", user.imc)
             put("imcCategory", user.imcCategory)
-            put("metabolicMetric", user.metabolicalMetric)
             put("baseCalories", user.baseCalories)
             put("idealWeight", user.idealWeight)
             put("waterConsumption", user.waterConsumption)
@@ -56,7 +55,6 @@ class UserDao(context: Context) {
                 sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
                 imc = cursor.getString(cursor.getColumnIndex("imc")),
                 imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
-                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
                 baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
                 idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
                 waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
@@ -93,7 +91,6 @@ class UserDao(context: Context) {
                 sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
                 imc = cursor.getString(cursor.getColumnIndex("imc")),
                 imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
-                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
                 baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
                 idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
                 waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),
@@ -123,7 +120,6 @@ class UserDao(context: Context) {
                 sportsLevel = cursor.getString(cursor.getColumnIndex("sportsLevel")),
                 imc = cursor.getString(cursor.getColumnIndex("imc")),
                 imcCategory = cursor.getString(cursor.getColumnIndex("imcCategory")),
-                metabolicalMetric = cursor.getDouble(cursor.getColumnIndex("metabolicMetric")),
                 baseCalories = cursor.getString(cursor.getColumnIndex("baseCalories")),
                 idealWeight = cursor.getString(cursor.getColumnIndex("idealWeight")),
                 waterConsumption = cursor.getString(cursor.getColumnIndex("waterConsumption")),

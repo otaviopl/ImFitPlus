@@ -43,7 +43,7 @@ class CalculateWeightActivity : AppCompatActivity() {
         binding.tvIdealResult.text = buildString {
             appendLine("Olá, $name!")
             appendLine("Altura: ${"%.2f".format(heightM)} m")
-            appendLine("Peso ideal (IMC=22): ${"%.2f".format(ideal)} kg")
+            appendLine("Peso ideal (IMC=22): ${"%s".format(ideal)} kg")
             if (delta != null) {
                 val dir = if (delta > 0) "ganhar" else "perder"
                 append("Diferença até o ideal: ${"%.2f".format(abs(delta))} kg para $dir")
